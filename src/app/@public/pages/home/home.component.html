@@ -1,0 +1,103 @@
+<shop-carousel-items [items]="items"></shop-carousel-items>
+
+<div class="container-fluid" *ngIf="!loading">
+  <div class="row justify">
+    <div class="col-md-6">
+      <div class="card text-white mb-3">
+        <img
+          src="https://imgstoreweb.blob.core.windows.net/imgweb/mujerestenis.jpg"
+          class="card-img"
+          alt="..."
+        />
+        <div class="card-img-overlay">
+          <h2 class="card-title">
+            Si lo vives con pasion tendras la suficiente motivacion
+          </h2>
+          <button
+            type="button"
+            class="btn btn-warning golink"
+            routerLink="tienda/platforms/tenis de mujer"
+          >
+            Ir a Mujeres
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card text-white mb-3">
+        <img
+          src="https://imgstoreweb.blob.core.windows.net/imgweb/tenishombres.jpg"
+          class="card-img"
+          alt="..."
+        />
+        <div class="card-img-overlay">
+          <h2 class="card-title">Sueña sin miedos Entrena sin Limites</h2>
+          <button
+            type="button"
+            class="btn btn-warning"
+            routerLink="tienda/platforms/tenis de hombre"
+          >
+            Ir a Hombres
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <img
+          src="https://imgstoreweb.blob.core.windows.net/imgweb/tenis2.jpeg"
+          class="img-fluid ls"
+          alt="..."
+        />
+      </div>
+    </div>
+  </div>
+
+  <app-product-category-list
+    class="text"
+    *ngIf="listOne"
+    [title]="'Tenis de Mujer'"
+    [productsList]="listOne"
+    [selectCurrency]="selectCurrency"
+    [showDesc]="false"
+  ></app-product-category-list>
+
+  <app-product-category-list
+    class="text"
+    *ngIf="listTwo"
+    [title]="'Tenis de Hombre'"
+    [productsList]="listTwo"
+    [selectCurrency]="selectCurrency"
+    [showDesc]="false"
+  ></app-product-category-list>
+
+  <app-product-category-list
+    class="text"
+    *ngIf="listthree"
+    [title]="'Tenis de Niña'"
+    [productsList]="listthree"
+    [selectCurrency]="selectCurrency"
+    [showDesc]="false"
+  ></app-product-category-list>
+
+  <app-product-category-list
+    class="text"
+    *ngIf="listfour"
+    [title]="'Tenis de Niño'"
+    [productsList]="listfour"
+    [selectCurrency]="selectCurrency"
+    [showDesc]="false"
+  ></app-product-category-list>
+
+  <app-product-category-list
+    class="text"
+    *ngIf="listfive"
+    [title]="'Tenis mas Economicos'"
+    [productsList]="listfive"
+    [selectCurrency]="selectCurrency"
+    [showDesc]="true"
+  ></app-product-category-list>
+</div>

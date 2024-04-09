@@ -1,0 +1,23 @@
+[
+{
+    "url": "/admin",
+    "label": "Dashboard",
+    "icon": "fa fa-columns"
+},
+{
+    "url": "/admin/users",
+    "label": "Usuarios",
+    "icon": "fa fa-user"
+},
+{
+    "url": "/admin/tags",
+    "label": "Tags (etiquetas)",
+    "icon": "fa fa-tags"
+},
+{
+    "url": "/admin/genres",
+    "label": "Generos",
+    "icon": "fas fa-window-maximize"
+}
+]
+

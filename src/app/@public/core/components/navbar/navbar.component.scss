@@ -1,0 +1,23 @@
+.custom-bg {
+  background-color: #2b2f33;
+  // background-color: #7e2af9;
+  // background-color: #fc29dc;
+  // background-color: #8a2be2;
+}
+
+.dropdown-item,
+.fas {
+  cursor: pointer;
+}
+.wi {
+  color: white !important;
+  margin: 8px;
+}
+.wi:hover {
+  background-color: rgba(243, 243, 243, 0.2);
+  border-radius: 3%;
+}
+
+.sombra:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}

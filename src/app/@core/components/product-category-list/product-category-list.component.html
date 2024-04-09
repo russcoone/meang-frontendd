@@ -1,0 +1,19 @@
+<section>
+  <div class="container">
+    <h3>{{ title }}</h3>
+
+    <hr />
+    <p *ngIf="description != ''">{{ description }}</p>
+    <div class="row justify-content-center mt-3">
+      <div class="col-lg-3" *ngFor="let p of productsList" style="width: auto">
+        <shop-product-item
+          [showDesc]="p.description != '' && showDesc"
+          [product]="p"
+          [selectCurrency]="selectCurrency"
+          (add)="addToCart($event)"
+          (itemDetails)="showProductDetails($event)"
+        ></shop-product-item>
+      </div>
+    </div>
+  </div>
+</section>

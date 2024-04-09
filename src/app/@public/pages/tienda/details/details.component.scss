@@ -1,0 +1,17 @@
+@import "./../../../../../assets/style/prices.scss";
+.container {
+  margin-top: 50px;
+}
+
+.mini {
+  margin-top: 10px;
+}
+
+/* Estilos de los precios  **/
+
+//responsil
+@media (max-width: 600px) {
+  #screens-section {
+    display: none;
+  }
+}

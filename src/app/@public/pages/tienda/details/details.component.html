@@ -1,0 +1,156 @@
+<button
+  type="button"
+  class="btn btn-warning mt-3 m-2 sticky-top float-right"
+  routerLink="/#/"
+>
+  Inicio
+</button>
+
+<div class="container" *ngIf="product && !loading">
+  <div class="row">
+    <div class="col-md-3 m-2" id="screens-section">
+      <img
+        class="img-fluid mini"
+        *ngFor="let miniImg of screens; let i = index"
+        [src]="miniImg"
+        alt="Screen {{ i }}"
+        (click)="selectImgMain(i)"
+      />
+    </div>
+
+    <div class="col-sm-8">
+      <img class="img-fluid" [src]="selectImage" alt="" />
+      <div class="col-sm-12">
+        <h4 class="my-3">{{ product.name }} ({{ product.description }})</h4>
+        <div class="row">
+          <div class="col-sm-12">
+            <shop-rating [rating]="product.rating"></shop-rating>
+          </div>
+          <div class="col-sm-12">
+            <ng-template #noDiscount>
+              <div class="price">{{ currencySelect }} {{ product.price }}</div>
+            </ng-template>
+
+            <div class="price" *ngIf="product.discount; else noDiscount">
+              {{ currencySelect }} {{ product.priceDiscount | number }}
+              <span> {{ currencySelect }} {{ product.price | number }} </span>
+              <span class="discount-percentage">
+                ({{ product.discount }} %)
+              </span>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            Stock: {{ product.stock }}
+            <hr />
+            <shop-qty-selector
+              [qty]="product.qty"
+              [stock]="product.stock"
+              (updateValue)="changeValue($event)"
+            ></shop-qty-selector>
+          </div>
+        </div>
+        <span class="h5">Generos:</span>&nbsp;
+        <select (change)="selectOtherPlatform($event)">
+          <option [value]="product.id">{{ product.description }}</option>
+          <option [value]="opt.id" *ngFor="let opt of relationalProducts">
+            {{ opt.platform.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <hr/>
+
+  <h3 class="my-4">Tenis que te podrian interesar</h3>
+
+  <div class="row">
+    <div class="col-md-4 col-sm-6 mb-4" *ngFor="let itemInfo of randomItems">
+      <a
+        [routerLink]="['/tienda/details', itemInfo.id]"
+        title="{{ itemInfo.name }} ({{ itemInfo.description }})"
+      >
+        <img
+          class="img-fluid"
+          [src]="itemInfo.img"
+          alt="{{ itemInfo.name }} ({{ itemInfo.description }})"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container">
+
+ 
+
+  <div class="row">
+    <div class="col-md-2">
+      <img class="img-fluid mini" src="https://via.placeholder.com/750x500" alt="">
+      <img class="img-fluid mini" src="https://via.placeholder.com/750x500" alt="">
+      <img class="img-fluid mini" src="https://via.placeholder.com/750x500" alt="">
+
+
+
+    </div>
+    
+    <div class="col-md-6">
+      <img class="img-fluid" src="https://via.placeholder.com/750x500" alt="">
+    </div>
+
+    <div class="col-md-4">
+      <h3 class="my-3">Project Description</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+      <h3 class="my-3">Project Details</h3>
+      <ul>
+        <li>Lorem Ipsum</li>
+        <li>Dolor Sit Amet</li>
+        <li>Consectetur</li>
+        <li>Adipiscing Elit</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <h3 class="my-4">Tenis Relacionados</h3>
+
+  <div class="row">
+
+    <div class="col-md-2 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="https://via.placeholder.com/500x300" alt="">
+          </a>
+    </div>
+
+    <div class="col-md-2 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="https://via.placeholder.com/500x300" alt="">
+          </a>
+    </div>
+
+    <div class="col-md-2 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="https://via.placeholder.com/500x300" alt="">
+          </a>
+    </div>
+
+    <div class="col-md-2 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="https://via.placeholder.com/500x300" alt="">
+          </a>
+    </div>
+
+    <div class="col-md-2 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="https://via.placeholder.com/500x300" alt="">
+          </a>
+    </div>
+
+    <div class="col-md-2 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="https://via.placeholder.com/500x300" alt="">
+          </a>
+    </div>
+
+  </div>
+
+</div> -->
