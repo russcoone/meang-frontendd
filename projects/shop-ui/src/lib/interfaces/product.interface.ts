@@ -12,6 +12,8 @@ export interface IProduct {
     /** Stock total value */
     stock: number;
     /** Discount percentage */
+    talla: string;
+    /**talla de sapatos */
     discount?: number;
     /** Real price */
     price: number;

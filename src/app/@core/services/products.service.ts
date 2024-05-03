@@ -153,6 +153,7 @@ export class ProductsService extends ApiService {
       qty: 1,
       price: shopObject.price,
       stock: shopObject.stock,
+      talla: shopObject.talla,
 
 
     }

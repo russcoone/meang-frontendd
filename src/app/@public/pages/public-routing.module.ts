@@ -27,6 +27,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'checkout',
+        loadChildren: () =>
+          import('./forms/checkout/checkout.module').then(
+            (m) => m.CheckoutModule
+          ),
+      },
+      {
         path: 'contact',
         loadChildren: () =>
           import('./contact/contact.module').then((m) => m.ContactModule),
@@ -68,4 +75,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PublicRoutingModule {}
+export class PublicRoutingModule { }

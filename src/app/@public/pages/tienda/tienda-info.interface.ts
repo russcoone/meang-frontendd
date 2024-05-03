@@ -4,5 +4,6 @@ export interface ITiendaPageInfo {
     platformsIds: Array<string>;
     topPrice: number;
     stock: number;
+    talla: string;
 
 }

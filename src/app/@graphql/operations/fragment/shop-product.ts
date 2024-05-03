@@ -5,6 +5,7 @@ export const SHOP_PRODUCT_FRAGMENT = gql`
     id
     price
     stock
+    talla
     product {
       name
       img

@@ -17,7 +17,7 @@ export class LoginComponent {
     password: '',
   };
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
 
   init() {
     console.log(this.login);
@@ -27,11 +27,19 @@ export class LoginComponent {
         console.log(result);
         if (result.status) {
           if (result.token !== null) {
-            basicAlert(TYPE_ALERT.SUCCESS, result.message);
+            // basicAlert(TYPE_ALERT.SUCCESS, result.message);
             this.auth.setSession(result.token);
             this.auth.updateSeccion(result);
+            if (localStorage.getItem('route_after_login')) {
+              this.router.navigate([localStorage.getItem('route_after_login')]);
+              localStorage.removeItem('route_after_login')
+              return;
+
+            }
             this.router.navigate(['/home']);
-            return;
+
+
+            return
           }
 
           basicAlert(TYPE_ALERT.WARNING, result.message);
