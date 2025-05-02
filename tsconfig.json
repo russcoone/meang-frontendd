@@ -1,5 +1,6 @@
 {
   "compileOnSave": false,
+  
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
@@ -31,12 +32,15 @@
       "dom"
     ],
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
-    "strictTemplates": false
+    "strictTemplates": false,
+    "enableIvy": false,
+   
 
   }
 }

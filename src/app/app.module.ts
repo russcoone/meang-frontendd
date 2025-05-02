@@ -21,4 +21,4 @@ import { AdminModule } from './@admin/pages/admin.module';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

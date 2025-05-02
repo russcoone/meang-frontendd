@@ -63,7 +63,12 @@
             aria-labelledby="navbarDropdown"
           >
             <a class="dropdown-item sombra" href="#!">Perfil</a>
-            <a class="dropdown-item sombra" href="#!">Configuracion</a>
+            <a
+              class="dropdown-item sombra"
+              [routerLink]="['/orders']"
+              routerLinkActive="router-link-active"
+              >Pedidos</a
+            >
             <div class="dropdown-divider"></div>
             <a class="dropdown-item sombra" (click)="logout()"
               >Salir de la sesion</a

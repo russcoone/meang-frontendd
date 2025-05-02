@@ -1,4 +1,4 @@
-<div class="container mt-4" *ngIf="meData">
+<!-- <div class="container mt-4" *ngIf="meData">
   <div class="row">
     <div class="col-md-4 order-md-2 mb-4">
       <app-checkout-resume></app-checkout-resume>
@@ -6,7 +6,7 @@
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Informacion de pago</h4>
       <hr />
-      <form class="needs-validation" novalidate="">
+      <form class="needs-validation" (ngSubmit)="sendData()" #form="">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label>Nombre</label><br />
@@ -75,59 +75,159 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="cc-name">Name on card</label>
-            <input
-              type="text"
-              class="form-control"
-              id="cc-name"
-              placeholder=""
-              required=""
-            />
-            <small class="text-muted">Full name as displayed on card</small>
-            <div class="invalid-feedback">Name on card is required</div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="cc-number">Credit card number</label>
-            <input
-              type="text"
-              class="form-control"
-              id="cc-number"
-              placeholder=""
-              required=""
-            />
-            <div class="invalid-feedback">Credit card number is required</div>
+          <div class="col-lg">
+            <ng-stripe-pay-form
+              [key]="key"
+              [hidePostalCode]="true"
+            ></ng-stripe-pay-form>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-3 mb-3">
-            <label for="cc-expiration">Expiration</label>
-            <input
-              type="text"
-              class="form-control"
-              id="cc-expiration"
-              placeholder=""
-              required=""
-            />
-            <div class="invalid-feedback">Expiration date required</div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="cc-cvv">CVV</label>
-            <input
-              type="text"
-              class="form-control"
-              id="cc-cvv"
-              placeholder=""
-              required=""
-            />
-            <div class="invalid-feedback">Security code required</div>
-          </div>
-        </div>
+
         <hr class="mb-4" />
-        <button class="btn btn-primary btn-lg btn-block" type="submit">
+        <button
+          class="btn btn-primary btn-lg btn-block"
+          (click)="sendData()"
+          type="submit"
+        >
           Continue to checkout
         </button>
       </form>
+    </div>
+  </div>
+</div> -->
+
+<div class="container mt-4" *ngIf="meData && available">
+  <div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+      <app-checkout-resume></app-checkout-resume>
+    </div>
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Información sobre el pago</h4>
+      <hr />
+      <form class="needs-validation" (ngSubmit)="sendData()" #forma="ngForm">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>Nombre</label><br />
+            <span>{{ meData.user.name }}</span>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>Apellidos</label><br />
+            <span>{{ meData.user.lastname }}</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label>Email</label><br />
+          <span>{{ meData.user.email }}</span
+          ><br />
+        </div>
+        <div class="mb-3">
+          <label for="address">Direccion de entrega</label>
+          <textarea
+            cols="50"
+            rows="4"
+            type="text"
+            class="form-control"
+            id="address"
+            #addressData="ngModel"
+            [(ngModel)]="address"
+            [ngClass]="{
+              'is-valid': !addressData.invalid,
+              'is-invalid': addressData.invalid
+            }"
+            name="address"
+            required=""
+          ></textarea>
+          <div class="invalid-feedback">Por favor introduzca su direccion</div>
+        </div>
+
+        <!-- <div class="mb-3">
+                  <label for="address">Dirección de entrega</label>
+                  <textarea #adressDelivery="ngModel" [(ngModel)]="address" name="address"
+                      required=""></textarea>
+                  <div class="invalid-feedback">
+                      Por favor, introduce la dirección de envío.
+                  </div>
+              </div> -->
+
+        <div class="mb-3">
+          <label for="address2"
+            >Añadir a dirección
+            <span class="text-muted">(Optional)</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="address2"
+            placeholder="Casa, apartamento, finca..."
+          />
+        </div>
+
+        <hr class="mb-4" />
+
+        <h4 class="mb-3">Datos de pago</h4>
+
+        <div class="d-block my-3">
+          <div class="custom-control custom-radio">
+            <input
+              id="debit"
+              name="paymentMethod"
+              type="radio"
+              class="custom-control-input"
+              required=""
+            />
+            <label class="custom-control-label" for="debit">Debit card</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input
+              id="credit"
+              name="paymentMethod"
+              type="radio"
+              class="custom-control-input"
+              checked=""
+              required=""
+            />
+            <label class="custom-control-label" for="credit">Credit card</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input
+              id="paypal"
+              name="paymentMethod"
+              type="radio"
+              class="custom-control-input"
+              required=""
+            />
+            <label class="custom-control-label" for="paypal">PayPal</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg">
+            <ng-stripe-pay-form
+              [key]="key"
+              [hidePostalCode]="true"
+            ></ng-stripe-pay-form>
+          </div>
+        </div>
+        <hr class="mb-4" />
+      </form>
+      <!-- <button
+          class="btn btn-primary btn-lg btn-block"51
+          (click)="sendData()"
+          class="signup-btn"
+          type="submit"
+        >
+          Pagar pedido
+        </button> -->
+      <button
+        class="signup-btn btn-lg btn-block"
+        [disabled]="!forma.valid || block"
+        (click)="sendData()"
+        type="submit"
+      >
+        Pagar Pedido
+      </button>
+      <!-- <button *ngIf="paypal" (click)="sendData()" [disabled]="!form.valid || blockOnce" class="signup-btn paypal" type="submit">Pagar por PayPal</button> -->
+      <!-- <button (click)="addPaypalScript()" *ngIf="paypal" (click)="sendData()" [disabled]="!form.valid || blockOnce" class="signup-btn paypal" type="submit">Pagar por PayPal</button> -->
     </div>
   </div>
 </div>

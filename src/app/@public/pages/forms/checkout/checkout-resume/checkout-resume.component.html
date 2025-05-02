@@ -12,13 +12,14 @@
         <div class="col-lg-8">
           <h6 class="my-0">{{ product.name }}</h6>
           <small class="text-muted"
-            >{{ product.description }} {{ product.qty }} uds.
-            <h6 class="talla1">Talla:{{ product.talla }}</h6>
+            >{{ product.description }} - {{ product.qty }} uds.
+            <!--tratar de allar la forma de que no marque error no olvidar -->
+            <!-- <h6 class="talla1">Talla:{{ product.talla }}</h6> -->
           </small>
         </div>
         <div class="col-lg">
           <span class="text-muted float-right"
-            >{{ currencySelect }} {{ product.price }}</span
+            >{{ currencySelect }} {{ product.price * product.qty }}</span
           >
         </div>
       </div>

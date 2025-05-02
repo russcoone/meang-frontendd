@@ -7,7 +7,7 @@
         <p>Introduzca los credenciales para iniciar la sesión</p>
         <p class="psw">
           ¿No tienes cuenta? Entra
-          <a href="#">aquí</a> para crearla gratis
+          <a href="#/register">aquí</a> para crearla gratis
         </p>
         <hr />
         <label for="email"><b>Correo electrónico</b></label>
@@ -34,7 +34,7 @@
           </div>
           <div *ngIf="email.errors && email.errors.pattern">
             El correo electronico no sigue el formato correcto. Sigue este
-            ejemplo sentosos@sentosos.com
+            ejemplo
           </div>
         </div>
 
@@ -65,7 +65,7 @@
 
         <div class="row">
           <div class="col-lg">
-            <button type="submit" [disabled]="!forma.valid" class="signup-btn">
+            <button type="submit" [disabled]="false" class="signup-btn">
               Iniciar sesión
             </button>
           </div>

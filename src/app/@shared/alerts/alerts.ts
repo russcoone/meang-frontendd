@@ -1,3 +1,4 @@
+import { TYPE_ALERT } from '@shared/alerts/values.confing';
 import { EMAIL_PATTERN } from '@core/constants/regex';
 import Swal from 'sweetalert2';
 
@@ -109,3 +110,17 @@ export const loadDate = (title: string, html: string) => {
 export const closeAlert = () => {
   Swal.close();
 };
+
+
+
+export const infoEventAlert = async (title: string, html: string, typeAlert: TYPE_ALERT = TYPE_ALERT.WARNING) => {
+  return await Swal.fire({
+    title,
+    html,
+    icon: typeAlert,
+    preConfirm: () => {
+      return true
+    }
+  });
+};
+
