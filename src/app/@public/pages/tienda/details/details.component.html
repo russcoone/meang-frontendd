@@ -22,6 +22,7 @@
       <img class="img-fluid" [src]="selectImage" alt="" />
       <div class="col-sm-12">
         <h4 class="my-3">{{ product.name }} ({{ product.description }})</h4>
+
         <div class="row">
           <div class="col-sm-12">
             <shop-rating [rating]="product.rating"></shop-rating>
@@ -43,7 +44,11 @@
             Stock: {{ product.stock }} <br /><span class="talla1"> Talla:</span>
             {{ product.talla }}
             <hr />
+            <span *ngIf="product.stock === 0"
+              >No hay stock. Product no disponible en este momento.</span
+            >
             <shop-qty-selector
+              *ngIf="product.stock > 0"
               [qty]="product.qty"
               [stock]="product.stock"
               (updateValue)="changeValue($event)"
@@ -53,12 +58,16 @@
         <span class="h5">Generos:</span>&nbsp;
         <select (change)="selectOtherPlatform($event)">
           <option [value]="product.id">{{ product.description }}</option>
-          <option [value]="opt.id" *ngFor="let opt of relationalProducts">
+          <!-- <option [value]="opt.id" *ngFor="let opt of relationalProducts">
             {{ opt.platform.name }}
-          </option>
-        </select>
+          </option> --></select
+        ><br />
       </div>
-      <button (click)="addToCart()" class="btn btn-dark mt-2">
+      <button
+        (click)="addToCart()"
+        *ngIf="product.stock > 0"
+        class="btn btn-dark mt-2"
+      >
         <i class="fas fa-cart-plus"></i>&nbsp;&nbsp; Añadir
       </button>
     </div>

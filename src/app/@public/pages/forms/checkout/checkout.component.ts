@@ -17,6 +17,8 @@ import { IPayment } from '@core/interfaces/stripe/payment.interface';
 import { ICart } from '@shop-core/components/shopping-cart/shoppin.cart.interface';
 import { ICharge } from '@core/interfaces/stripe/charge.interface';
 import { take } from 'rxjs/internal/operators/take';
+import { IStock } from '@core/interfaces/stock.interface';
+import { IProduct } from 'projects/shop-ui/src/lib/interfaces';
 
 
 @Component({
@@ -71,13 +73,24 @@ export class CheckoutComponent implements OnInit {
           customer: this.meData.user.stripeCustomer,
           currency: CURRENCY_CODE
         };
+        const stockManage: Array<IStock> = [];
+        this.cartService.cart.products.map((item: IProduct) => {
+          stockManage.push(
+            {
+              id: +item.id,
+              increment: item.qty * (-1)
+            }
+          )
+
+        });
+
         this.block = true;
         loadDate('Realizando el pago',
           'Espera mientras se procesa la informacion de pago'
         );
 
         //Enviar la informacion y procesar el apgo
-        this.ChargeService.pay(payment).pipe(take(1))
+        this.ChargeService.pay(payment, stockManage).pipe(take(1))
           .subscribe(async (result: {
             status: boolean,
             message: string,

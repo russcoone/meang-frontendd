@@ -15,6 +15,8 @@ import { ICart } from '@shop-core/components/shopping-cart/shoppin.cart.interfac
 })
 export class DetailsComponent implements OnInit {
   product: IProduct
+
+
   // products[Math.floor(Math.random() * products.length)];
   selectImage: string;
   currencySelect = CURRENCY_SELECT;
@@ -24,6 +26,7 @@ export class DetailsComponent implements OnInit {
   activateRoute: any;
   loading: boolean;
 
+
   constructor(private productService: ProductsService, private activatedRoute: ActivatedRoute, private cartService: CartService) { }
   ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
@@ -31,6 +34,7 @@ export class DetailsComponent implements OnInit {
       loadDate('Cargando datos...', 'Cargando datos...');
       this.loading = true;
       this.loadDateValue(+params.id);
+      this.updateListener(+params.id);
     });
     this.cartService.itemsVar$.subscribe((data: ICart) => {
       if (data.subtotal === 0) {
@@ -42,6 +46,26 @@ export class DetailsComponent implements OnInit {
     });
   }
 
+  updateListener(id: number) {
+    console.log('escuchando', id);
+    this.productService.stockUpdateListener(id).subscribe(
+      (result) => {
+        console.log('Actualizacion', result);
+        this.product.stock = result.stock
+
+        //comprivar que el stock es igual o mayor que la cantidad seleccionada
+
+        if (this.product.qty > this.product.stock) {
+          this.product.qty = this.product.stock;
+        }
+        if (this.product.stock === 0) {
+          this.product.qty = 1;
+        }
+
+      }
+    );
+  }
+
   findProduct(id: number) {
     return this.cartService.cart.products.find(item => +item.id === id)
   }
@@ -51,7 +75,6 @@ export class DetailsComponent implements OnInit {
       console.log(result);
       this.product = result.product;
       const saveProductInCart = this.findProduct(+this.product.id);
-      console.log(saveProductInCart);
       this.product.qty = (saveProductInCart !== undefined) ? saveProductInCart.qty : this.product.qty;
       this.selectImage = this.product.img;
       this.screens = result.screens;
@@ -70,7 +93,10 @@ export class DetailsComponent implements OnInit {
 
   selectOtherPlatform($event) {
     console.log($event.target.value)
-    this.loadDateValue(+$event.target.value)
+    const id = +$event.target.value;
+    this.loadDateValue(id);
+    this.updateListener(id);
+    window.history.replaceState({}, '', `/#/games/details/${id}`);
 
   }
 

@@ -1,5 +1,4 @@
-import { DetailsComponent } from './../../@public/pages/tienda/details/details.component';
-import { randomItems } from './../../../../../backend-meang-online-shop/src/lib/db-operations';
+import { SUBSCRIPRIONS_PRODUCT_SELECT_STOCK } from './../../@graphql/operations/subscription/shop-product';
 import { Apollo } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import { ApiService } from '@graphql/service/api.service';
@@ -7,7 +6,6 @@ import { ACTIVE_FILTERS } from '@core/constants/filter';
 import {
   SHOP_LAST_UNITS_OFFERS,
   SHOP_PRODUCT_BY_PLATFORM,
-  SHOP_PRODUCT_DETAILS,
   SHOP_PRODUCT_RANDOM_ITEMS,
 } from '@graphql/operations/query/shop-product';
 import { map } from 'rxjs/operators';
@@ -165,4 +163,14 @@ export class ProductsService extends ApiService {
     });
     return resultList;
   }
+
+  stockUpdateListener(id: number) {
+    return this.subscription(
+      SUBSCRIPRIONS_PRODUCT_SELECT_STOCK,
+      { id }
+    ).pipe(map((result: any) => {
+      return result.selectProductStockUpdate;
+    }));
+  }
+
 }
